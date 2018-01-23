@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Tinder.com</title>
+    <style type="text/css">
+    .content-area
+    {
+		    position: relative;
+		    width: 960px;
+		    margin: 0 auto;
+        padding-top:40px;
+	   }
+     .like
+     {
+       display:none;
+       width: 300px;
+       height: 100px;
+     }
+     .tinder
+     {
+       margin:0 auto;
+       border:1px solid black;
+     }
+     img
+     {
+         width:300px;
+         height:500px;
+         margin:0 auto;
+     }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/spectre.css/0.5.0/spectre.min.css" />
+  </head>
+  <body>
+    <div class="content-area">
+      <div class="container">
+        <div class="columns">
+          <div id="tinderCard" class="column col-4 tinder">
+            <p id="profile"> <img src="image1.jpeg"></p>
+            <img src="like.png" class="like column col-4">
+            <h2 id="name"> Stephany Jane </h2>
+            <h3 id="age"> 30 years old </h3>
+            <p id="desc">  I love movies, hiking, and the beach </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js" integrity="sha256-GMd3rFxMDNnM5JQEpiKLLl8kSrDuG5egqchk758z59g=" crossorigin="anonymous"></script>
+    <script src="jquery.hammer.js"></script>
+    <script type="text/javascript">
+    var nameOfPerson =['Mehgan Markle','Richel Yellow','Felicity Smoke','Harvey Spector','Mike Ross'];
+    var ageOfPerson =['25 years old','30 years old','31 years old','32 years old','33 years old'];
+    var hobbies = ['I like movies','I like salad','I like hiking','I like reading','I like music' ];
+    var images = ['<img src="image2.jpeg">','<img src="image3.jpeg">','<img src="image4.jpeg">','<img src="image5.jpeg">','<img src="image6.jpeg">']
+    var index = 0;
+    var card = $("#tinderCard");
+    card.hammer().bind("swipeleft", dislike);
+    card.hammer().bind("swiperight", like);
+    function dislike(ev)
+    {
+        console.log(ev.type + " gesture detected");
+        if ($(".like").is(":visible"))
+        {
+          $(".like").hide();
+        }
+      $("#name").empty();
+      $("#age").empty();
+      $("#desc").empty();
+      $("#profile").empty();
+
+      $("#name").append(nameOfPerson[index]);
+      $("#age").append(ageOfPerson[index]);
+      $("#desc").append(hobbies[index]);
+      $("#profile").append(images[index]);
+      if (index == 4)
+      {
+        index = 0;
+      }else
+      {
+          index = index+1;
+      }
+    }
+    function like(ev)
+    {
+      console.log(ev.type + " gesture detected");
+      $(".like").show();
+    }
+    </script>
+  </body>
+</html>
